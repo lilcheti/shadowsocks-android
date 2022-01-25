@@ -13,7 +13,7 @@
     - `com.google.android.material:material:1.2.1`;
     - `org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10`.
 * 1.3.4:
-  * Optional new metadata `com.github.shadowsocks.plugin.id.aliases` for plugin ID aliases;
+  * Optional new metadata `com.github.yellowvpn.plugin.id.aliases` for plugin ID aliases;
     (see doc for `PluginContract.METADATA_KEY_ID_ALIASES` and main documentation "Plugin ID Aliasing" for more information)
   * Please use `android:path` instead of `android:pathPrefix`, sample code in documentations have been updated to reflect this recommendation.
   * Added missing documentation regarding direct boot support.
@@ -43,7 +43,7 @@
     - `com.google.android.material:material:1.1.0-alpha09`;
     - `org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.41`.
 * 1.3.0:
-  * Optional new metadata `com.github.shadowsocks.plugin.executable_path` for even faster initialization;
+  * Optional new metadata `com.github.yellowvpn.plugin.executable_path` for even faster initialization;
     (see doc for `PluginContract.METADATA_KEY_EXECUTABLE_PATH` for more information)
   * Breaking API change: `val AlertDialogFragment.ret: Ret?` => `fun AlertDialogFragment.ret(which: Int): Ret?`;
     (nothing needs to be done if you are not using this API)

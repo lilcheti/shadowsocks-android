@@ -28,4 +28,5 @@
     <string name="yes">"بله"</string>
     <string name="no">"خیر"</string>
     <string name="apply">"تایید"</string>
+    <string name="choose_below">لطفا یکی از سرور های زیر را انتخاب کنید 👇️</string>
 </resources>

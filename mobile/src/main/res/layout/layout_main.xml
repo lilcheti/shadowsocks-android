@@ -6,7 +6,9 @@
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+
+    >
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/snackbar"
         android:clipChildren="false"
@@ -33,7 +35,7 @@
             app:indicatorColor="@color/material_accent_200"
             app:trackThickness="8dp"
             app:trackCornerRadius="@dimen/mtrl_progress_track_thickness"/>
-        <com.github.shadowsocks.widget.ServiceButton
+        <com.github.yellowvpn.widget.ServiceButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,9 +45,10 @@
             app:backgroundTint="@color/background_service"
             app:fabSize="normal"
             app:pressedTranslationZ="6dp"
-            app:srcCompat="@drawable/ic_service_idle"/>
+            app:srcCompat="@drawable/ic_service_idle"
+            />
 
-        <com.github.shadowsocks.widget.StatsBar
+        <com.github.yellowvpn.widget.StatsBar
             android:id="@+id/stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,7 +135,7 @@
 
             </GridLayout>
 
-        </com.github.shadowsocks.widget.StatsBar>
+        </com.github.yellowvpn.widget.StatsBar>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -142,8 +145,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:insetForeground="@null"
-        app:itemIconTint="@color/nav_item_tint"
-        app:itemTextColor="@color/nav_item_tint"
-        app:headerLayout="@layout/navigation_header"
-        app:menu="@menu/navigation_main" />
+        android:visibility="gone"
+        />
 </androidx.drawerlayout.widget.DrawerLayout>

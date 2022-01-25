@@ -9,7 +9,7 @@
                android:adjustViewBounds="true"
                android:importantForAccessibility="no"
                android:scaleType="centerCrop"
-               android:src="@drawable/background_header"/>
+               />
 
     <TextView android:id="@+id/drawer_title"
               android:layout_width="match_parent"

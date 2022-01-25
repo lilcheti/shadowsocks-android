@@ -7,10 +7,10 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/1a21d48d466644cdbcb57a1889abea5b)](https://www.codacy.com/app/shadowsocks/shadowsocks-android?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=shadowsocks/shadowsocks-android&amp;utm_campaign=Badge_Grade)
 [![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-orange.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-<a href="https://play.google.com/store/apps/details?id=com.github.shadowsocks"><img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="48"></a>
-for Android & Chrome OS ([beta](https://play.google.com/apps/testing/com.github.shadowsocks))  
-<a href="https://play.google.com/store/apps/details?id=com.github.shadowsocks.tv"><img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="48"></a>
-for Android TV ([beta](https://play.google.com/apps/testing/com.github.shadowsocks.tv))
+<a href="https://play.google.com/store/apps/details?id=com.github.yellowvpn"><img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="48"></a>
+for Android & Chrome OS ([beta](https://play.google.com/apps/testing/com.github.yellowvpn))
+<a href="https://play.google.com/store/apps/details?id=com.github.yellowvpn.tv"><img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="48"></a>
+for Android TV ([beta](https://play.google.com/apps/testing/com.github.yellowvpn.tv))
 
 
 ### PREREQUISITES

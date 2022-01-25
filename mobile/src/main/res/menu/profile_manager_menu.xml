@@ -3,7 +3,6 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:alphabeticShortcut="n"
-        android:icon="@drawable/ic_action_note_add"
         android:title="@string/add_profile"
         app:showAsAction="always">
         <menu>
@@ -32,7 +31,6 @@
     </item>
     <item
         android:alphabeticShortcut="s"
-        android:icon="@drawable/ic_file_file_upload"
         android:title="@string/action_export_more"
         app:showAsAction="always">
         <menu>

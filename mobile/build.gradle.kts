@@ -9,7 +9,7 @@ plugins {
 
 setupApp()
 
-android.defaultConfig.applicationId = "com.github.shadowsocks"
+android.defaultConfig.applicationId = "com.github.yellowvpn"
 
 dependencies {
     val cameraxVersion = "1.0.1"

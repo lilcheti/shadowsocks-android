@@ -8,4 +8,5 @@
     <string name="apply">Apply</string>
     <string name="browse">Browse…</string>
     <string name="file_manager_missing">Please install a file manager like MiXplorer</string>
+    <string name="choose_below">Please choose a server below 👇️</string>
 </resources>

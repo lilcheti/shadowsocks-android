@@ -11,7 +11,7 @@ setupApp()
 
 android {
     defaultConfig {
-        applicationId = "com.github.shadowsocks.tv"
+        applicationId = "com.github.yellowvpn.tv"
         buildConfigField("boolean", "FULLSCREEN", "false")
     }
     flavorDimensions.add("market")

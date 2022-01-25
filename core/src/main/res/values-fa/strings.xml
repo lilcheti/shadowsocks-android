@@ -68,7 +68,7 @@
 
     <!-- alert category -->
     <string name="profile_empty">"لطفا یک پروفایل انتخاب کنید."</string>
-    <string name="proxy_empty">"پروکسی یا کلمه عبور نباید خالی باشند!"</string>
+    <string name="proxy_empty">"لطفا یکی از سرور ها را انتخاب کنید"</string>
     <string name="connect">"اتصال"</string>
 
     <!-- menu category -->

@@ -3,10 +3,10 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <include layout="@layout/toolbar_light_dark" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/content"
-        android:name="com.github.shadowsocks.ProfileConfigFragment"
+        android:name="com.github.yellowvpn.ProfileConfigFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>

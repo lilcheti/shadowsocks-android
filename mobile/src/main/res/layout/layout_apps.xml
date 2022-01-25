@@ -15,7 +15,9 @@
       android:touchscreenBlocksFocus="false"
       android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
       app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"
-      android:id="@+id/toolbar">
+      android:id="@+id/toolbar"
+      android:visibility="gone"
+      >
 
     <SearchView
         android:id="@+id/search"

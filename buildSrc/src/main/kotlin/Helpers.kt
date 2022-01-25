@@ -57,7 +57,7 @@ fun Project.setupCore() {
     android.apply {
         defaultConfig {
             versionCode = 5020650
-            versionName = "5.2.6-nightly"
+            versionName = "1.0.0"
         }
         compileOptions.isCoreLibraryDesugaringEnabled = true
         lintOptions {
