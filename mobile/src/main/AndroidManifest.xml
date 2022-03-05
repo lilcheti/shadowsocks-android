@@ -5,11 +5,8 @@
 
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
                      tools:ignore="QueryAllPackagesPermission" />
-    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.touchscreen"
-                  android:required="false"/>
-    <uses-feature android:name="android.hardware.camera"
                   android:required="false"/>
     <uses-feature android:name="android.software.leanback"
                   android:required="false"/>
@@ -32,8 +29,6 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
             </intent-filter>
-            <meta-data android:name="android.app.shortcuts"
-                       android:resource="@xml/shortcuts"/>
         </activity>
 
         <activity
@@ -119,6 +114,10 @@
                 <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING"/>
             </intent-filter>
         </receiver>
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713-->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
 
 
     </application>

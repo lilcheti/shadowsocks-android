@@ -56,8 +56,8 @@ fun Project.setupCore() {
     setupCommon()
     android.apply {
         defaultConfig {
-            versionCode = 5020650
-            versionName = "1.0.0"
+            versionCode = 2
+            versionName = "1.0.1"
         }
         compileOptions.isCoreLibraryDesugaringEnabled = true
         lintOptions {
@@ -76,16 +76,7 @@ fun Project.setupApp() {
 
     android.apply {
         defaultConfig.resourceConfigurations.addAll(listOf(
-            "ar",
-            "es",
             "fa",
-            "fr",
-            "ja",
-            "ko",
-            "ru",
-            "tr",
-            "zh-rCN",
-            "zh-rTW",
         ))
         buildTypes {
             getByName("debug") {
@@ -94,7 +85,7 @@ fun Project.setupApp() {
             getByName("release") {
                 isShrinkResources = true
                 isMinifyEnabled = true
-                proguardFile(getDefaultProguardFile("proguard-android.txt"))
+                proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
             }
         }
         lintOptions.disable("RemoveWorkManagerInitializer")

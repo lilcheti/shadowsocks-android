@@ -13,7 +13,8 @@ android.defaultConfig.applicationId = "com.github.yellowvpn"
 
 dependencies {
     val cameraxVersion = "1.0.1"
-
+    implementation(project(":nativetemplates"))
+    implementation("com.google.android.gms:play-services-ads:20.5.0")
     implementation("androidx.browser:browser:1.3.0")
     implementation("androidx.camera:camera-camera2:$cameraxVersion")
     implementation("androidx.camera:camera-lifecycle:$cameraxVersion")

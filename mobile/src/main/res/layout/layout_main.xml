@@ -9,6 +9,8 @@
     android:fitsSystemWindows="true"
 
     >
+
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/snackbar"
         android:clipChildren="false"
@@ -34,7 +36,9 @@
             app:layout_behavior=".widget.FabProgressBehavior"
             app:indicatorColor="@color/material_accent_200"
             app:trackThickness="8dp"
-            app:trackCornerRadius="@dimen/mtrl_progress_track_thickness"/>
+            app:trackCornerRadius="@dimen/mtrl_progress_track_thickness"
+            />
+
         <com.github.yellowvpn.widget.ServiceButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
@@ -46,6 +50,7 @@
             app:fabSize="normal"
             app:pressedTranslationZ="6dp"
             app:srcCompat="@drawable/ic_service_idle"
+
             />
 
         <com.github.yellowvpn.widget.StatsBar
@@ -66,7 +71,6 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:orientation="vertical"
                 android:padding="16dip">
-
                 <TextView
                     android:id="@+id/tx"
                     android:layout_width="0dp"
@@ -139,12 +143,5 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:insetForeground="@null"
-        android:visibility="gone"
-        />
+
 </androidx.drawerlayout.widget.DrawerLayout>

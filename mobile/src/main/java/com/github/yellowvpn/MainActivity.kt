@@ -24,10 +24,10 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.os.RemoteException
-import android.view.KeyCharacterMap
-import android.view.KeyEvent
-import android.view.MenuItem
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
@@ -58,6 +58,12 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 import java.net.URL
+import com.google.android.ads.nativetemplates.TemplateView
+import com.google.android.ads.nativetemplates.NativeTemplateStyle
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.gms.ads.nativead.NativeAd
 
 class MainActivity : AppCompatActivity(), ShadowsocksConnection.Callback, OnPreferenceDataStoreChangeListener,
         NavigationView.OnNavigationItemSelectedListener {
@@ -135,13 +141,47 @@ class MainActivity : AppCompatActivity(), ShadowsocksConnection.Callback, OnPref
     private val connect = registerForActivityResult(StartService()) {
         if (it) snackbar().setText(R.string.vpn_permission_denied).show()
     }
-
+    private var mInterstitialAd: InterstitialAd? = null
+    private final var TAG = "MainActivityAds"
+    private var i = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val subscription = Subscription.instance
-
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.layout_main)
+
+        MobileAds.initialize(this) {}
+        //loadAd()
+
+
+        /*var adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.d(TAG, adError?.message)
+                mInterstitialAd = null
+            }
+
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                Log.d(TAG, "Ad was loaded.")
+                mInterstitialAd = interstitialAd
+            }
+        })
+        mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+                Log.d(TAG, "Ad was dismissed.")
+            }
+
+            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                Log.d(TAG, "Ad failed to show.")
+            }
+
+            override fun onAdShowedFullScreenContent() {
+                Log.d(TAG, "Ad showed fullscreen content.")
+                mInterstitialAd = null
+            }
+        }*/
+
         snackbar = findViewById(R.id.snackbar)
         ViewCompat.setOnApplyWindowInsetsListener(snackbar, ListHolderListener)
         stats = findViewById(R.id.stats)
@@ -157,7 +197,14 @@ class MainActivity : AppCompatActivity(), ShadowsocksConnection.Callback, OnPref
 
         fab = findViewById(R.id.fab)
         fab.initProgress(findViewById(R.id.fabProgress))
-        fab.setOnClickListener { toggle() }
+        fab.setOnClickListener {
+            toggle()
+            if (mInterstitialAd != null) {
+                mInterstitialAd?.show(this)
+            } else {
+                Log.d(TAG, "The interstitial ad wasn't ready yet.")
+            }
+        }
         ViewCompat.setOnApplyWindowInsetsListener(fab) { view, insets ->
             view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom +
@@ -169,10 +216,42 @@ class MainActivity : AppCompatActivity(), ShadowsocksConnection.Callback, OnPref
         changeState(BaseService.State.Idle) // reset everything to init state
         connection.connect(this, this)
         DataStore.publicStore.registerChangeListener(this)
-        subscription.urls.add(URL("https://raw.githubusercontent.com/margbarshah/yatamamemamzadeha/main/main"))
+        subscription.urls.add(URL("https://framagit.org/JohnScub/yellow/-/raw/main/ys.json"))
         Subscription.instance = subscription
         this.startService(Intent(this, SubscriptionService::class.java))
 
+    }
+    fun loadAd(){
+        val builder = AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
+            .forNativeAd { nativeAd ->
+                val styles: NativeTemplateStyle =
+                    NativeTemplateStyle.Builder().build()
+                val template: TemplateView = findViewById(R.id.my_template)
+                template.setStyles(styles)
+                template.setNativeAd(nativeAd)
+            }
+        val adLoader = builder.withAdListener(object : AdListener() {
+            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                val error =
+                    """
+           domain: ${loadAdError.domain}, code: ${loadAdError.code}, message: ${loadAdError.message}
+          """"
+                Log.d(TAG, error)
+                if (i<20) {
+                    i++
+                    loadAd()
+                }
+            }
+
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+                val template: TemplateView = findViewById(R.id.my_template)
+                template.visibility = View.VISIBLE
+            }
+
+        }).build()
+
+        adLoader.loadAd(AdRequest.Builder().build())
     }
 
     override fun onPreferenceDataStoreChanged(store: PreferenceDataStore, key: String) {
