@@ -27,6 +27,7 @@ import android.app.Service
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -97,13 +98,15 @@ class SubscriptionService : Service(), CoroutineScope {
                 val workers = urls.asIterable().map { url -> fetchJsonAsync(url, urls.size(), notification) }
                 try {
                     val localJsons = workers.awaitAll()
+                    if(localJsons[0]!=null){
+                        Log.e("Fuck","not empty")
                     withContext(Dispatchers.Main) {
                         Core.notification.notify(NOTIFICATION_ID, notification.apply {
                             setContentTitle(getText(R.string.service_subscription_finishing))
                             setProgress(0, 0, true)
                         }.build())
                         createProfilesFromSubscription(localJsons.asSequence().filterNotNull().map { it.inputStream() })
-                    }
+                    }}
                 } finally {
                     for (worker in workers) {
                         worker.cancel()
@@ -134,15 +137,16 @@ class SubscriptionService : Service(), CoroutineScope {
         } catch (e: Exception) {
             Timber.d(e)
             launch(Dispatchers.Main) {
-                Toast.makeText(this@SubscriptionService, e.readableMessage, Toast.LENGTH_LONG).show()
+                //Toast.makeText(this@SubscriptionService, e.readableMessage, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@SubscriptionService, "Internet connection problem can't update the Servers", Toast.LENGTH_LONG).show()
             }
-            if (!tempFile.delete()) tempFile.deleteOnExit()
+            //if (!tempFile.delete()) tempFile.deleteOnExit()
             null
         } finally {
             withContext(Dispatchers.Main) {
                 counter += 1
                 Core.notification.notify(NOTIFICATION_ID, notification.apply {
-                    setContentTitle(getString(R.string.service_subscription_working, counter, max))
+                    setContentTitle("Updating Servers!")
                     setProgress(max, counter, false)
                 }.build())
             }
