@@ -64,6 +64,7 @@ import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.ads.nativead.NativeAd
+import com.google.firebase.analytics.FirebaseAnalytics
 
 class MainActivity : AppCompatActivity(), ShadowsocksConnection.Callback, OnPreferenceDataStoreChangeListener,
         NavigationView.OnNavigationItemSelectedListener {
@@ -144,14 +145,19 @@ class MainActivity : AppCompatActivity(), ShadowsocksConnection.Callback, OnPref
     private var mInterstitialAd: InterstitialAd? = null
     private final var TAG = "MainActivityAds"
     private var i = 0
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val subscription = Subscription.instance
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.layout_main)
 
+        // Obtain the FirebaseAnalytics instance.
+        firebaseAnalytics = Firebase.analytics
+
         MobileAds.initialize(this) {}
-        //loadAd()
+        loadAd()
 
 
         /*var adRequest = AdRequest.Builder().build()
@@ -222,7 +228,7 @@ class MainActivity : AppCompatActivity(), ShadowsocksConnection.Callback, OnPref
 
     }
     fun loadAd(){
-        val builder = AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
+        val builder = AdLoader.Builder(this, "ca-app-pub-8241048936065417/7890077624")
             .forNativeAd { nativeAd ->
                 val styles: NativeTemplateStyle =
                     NativeTemplateStyle.Builder().build()

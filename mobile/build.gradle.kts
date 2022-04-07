@@ -26,4 +26,7 @@ dependencies {
     implementation("com.takisoft.preferencex:preferencex-simplemenu:1.1.0")
     implementation("com.twofortyfouram:android-plugin-api-for-locale:1.0.4")
     implementation("me.zhanghai.android.fastscroll:library:1.1.7")
+
+    implementation(platform("com.google.firebase:firebase-bom:29.2.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
 }
