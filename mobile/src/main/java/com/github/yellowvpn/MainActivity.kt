@@ -158,35 +158,7 @@ class MainActivity : AppCompatActivity(), ShadowsocksConnection.Callback, OnPref
 
         MobileAds.initialize(this) {}
         loadAd()
-
-
-        /*var adRequest = AdRequest.Builder().build()
-
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.d(TAG, adError?.message)
-                mInterstitialAd = null
-            }
-
-            override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                Log.d(TAG, "Ad was loaded.")
-                mInterstitialAd = interstitialAd
-            }
-        })
-        mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-                Log.d(TAG, "Ad was dismissed.")
-            }
-
-            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                Log.d(TAG, "Ad failed to show.")
-            }
-
-            override fun onAdShowedFullScreenContent() {
-                Log.d(TAG, "Ad showed fullscreen content.")
-                mInterstitialAd = null
-            }
-        }*/
+        loadInter()
 
         snackbar = findViewById(R.id.snackbar)
         ViewCompat.setOnApplyWindowInsetsListener(snackbar, ListHolderListener)
@@ -227,37 +199,78 @@ class MainActivity : AppCompatActivity(), ShadowsocksConnection.Callback, OnPref
         this.startService(Intent(this, SubscriptionService::class.java))
 
     }
-    fun loadAd(){
-        val builder = AdLoader.Builder(this, "ca-app-pub-8241048936065417/7890077624")
-            .forNativeAd { nativeAd ->
-                val styles: NativeTemplateStyle =
-                    NativeTemplateStyle.Builder().build()
-                val template: TemplateView = findViewById(R.id.my_template)
-                template.setStyles(styles)
-                template.setNativeAd(nativeAd)
-            }
-        val adLoader = builder.withAdListener(object : AdListener() {
-            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                val error =
-                    """
-           domain: ${loadAdError.domain}, code: ${loadAdError.code}, message: ${loadAdError.message}
-          """"
-                Log.d(TAG, error)
-                if (i<20) {
-                    i++
-                    loadAd()
+    fun loadInter(){
+        try {
+            var adRequest = AdRequest.Builder().build()
+
+            InterstitialAd.load(
+                this,
+                "ca-app-pub-8241048936065417/7883350528",
+                adRequest,
+                object : InterstitialAdLoadCallback() {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        Log.d(TAG, adError?.message)
+                        mInterstitialAd = null
+                    }
+
+                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                        Log.d(TAG, "Ad was loaded.")
+                        mInterstitialAd = interstitialAd
+                    }
+                })
+            mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+                override fun onAdDismissedFullScreenContent() {
+                    Log.d(TAG, "Ad was dismissed.")
+                }
+
+                override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                    Log.d(TAG, "Ad failed to show.")
+                }
+
+                override fun onAdShowedFullScreenContent() {
+                    Log.d(TAG, "Ad showed fullscreen content.")
+                    mInterstitialAd = null
                 }
             }
+        }catch(e: Exception){
+            loadInter()
+        }
+    }
+    fun loadAd(){
+        try {
+            val builder = AdLoader.Builder(this, "ca-app-pub-8241048936065417/7890077624")
+                .forNativeAd { nativeAd ->
+                    val styles: NativeTemplateStyle =
+                        NativeTemplateStyle.Builder().build()
+                    val template: TemplateView = findViewById(R.id.my_template)
+                    template.setStyles(styles)
+                    template.setNativeAd(nativeAd)
+                }
+            val adLoader = builder.withAdListener(object : AdListener() {
+                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                    val error =
+                        """
+           domain: ${loadAdError.domain}, code: ${loadAdError.code}, message: ${loadAdError.message}
+          """"
+                    Log.d(TAG, error)
+                    if (i < 20) {
+                        i++
+                        loadAd()
+                    }
+                }
 
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-                val template: TemplateView = findViewById(R.id.my_template)
-                template.visibility = View.VISIBLE
-            }
+                override fun onAdLoaded() {
+                    super.onAdLoaded()
+                    val template: TemplateView = findViewById(R.id.my_template)
+                    template.visibility = View.VISIBLE
+                }
 
-        }).build()
+            }).build()
 
-        adLoader.loadAd(AdRequest.Builder().build())
+            adLoader.loadAd(AdRequest.Builder().build())
+        }catch(e: Exception){
+            loadAd()
+        }
     }
 
     override fun onPreferenceDataStoreChanged(store: PreferenceDataStore, key: String) {
